@@ -26,7 +26,7 @@ A modern, web-based directory for organizing and accessing your favorite URLs. B
 1.  **Clone the repository** (or download source):
     ```bash
     git clone <repository-url>
-    cd project-2.2
+    cd LinkDirectory
     ```
 
 2.  **Install Dependencies**:
@@ -55,7 +55,7 @@ A modern, web-based directory for organizing and accessing your favorite URLs. B
 ## 📁 Project Structure
 
 ```
-project-2.2/
+LinkDirectory/
 ├── public/             # Static frontend files
 │   ├── app.js          # Client-side logic (fetch, DOM, confetti)
 │   ├── index.html      # Main HTML structure
