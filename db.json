@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "title": "Google",
+    "url": "https://google.com",
+    "category": "Search Engines"
+  },
+  {
+    "id": "2",
+    "title": "MDN Web Docs",
+    "url": "https://developer.mozilla.org",
+    "category": "Development"
+  },
+  {
+    "id": "1765532932548",
+    "title": "Test Link",
+    "url": "https://example.com",
+    "category": "Development"
+  },
+  {
+    "id": "1765533336834",
+    "title": "Browser Test",
+    "url": "https://example.com/test",
+    "category": "Development"
+  }
+]

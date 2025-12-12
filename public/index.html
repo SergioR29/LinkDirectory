@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Directory</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Link Directory</h1>
+            <p>Your curated collection of useful resources</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="add-link-section">
+            <h2>Add New Link</h2>
+            <form id="add-link-form">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required placeholder="e.g. My Favorite Site">
+                </div>
+                <div class="form-group">
+                    <label for="url">URL</label>
+                    <input type="url" id="url" name="url" required placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Select a Category</option>
+                        <option value="Search Engines">Search Engines</option>
+                        <option value="Development">Development</option>
+                        <option value="News">News</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Social Media">Social Media</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Add Link</button>
+            </form>
+        </section>
+
+        <section class="directory-section">
+            <h2>Directory</h2>
+             <div class="filters">
+                <!-- Potential future cleanup: add client-side filtering here -->
+            </div>
+            <div id="links-container" class="links-grid">
+                <!-- Links will be injected here -->
+                <p class="loading">Loading links...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Link Directory Project</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
