@@ -59,6 +59,20 @@ app.post('/api/links', (req, res) => {
     res.status(201).json(newLink);
 });
 
+// DELETE /api/links/:id
+app.delete('/api/links/:id', (req, res) => {
+    const { id } = req.params;
+    const links = readDb();
+    const filteredLinks = links.filter(link => link.id !== id);
+
+    if (links.length === filteredLinks.length) {
+        return res.status(404).json({ error: "Link not found" });
+    }
+
+    writeDb(filteredLinks);
+    res.json({ message: "Link deleted successfully" });
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

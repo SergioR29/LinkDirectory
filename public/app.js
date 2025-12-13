@@ -24,26 +24,64 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Sort by newest first (assuming higher ID is newer, or we can just reverse)
-        // Here we just reverse based on ID/insert order logic if needed.
-        // For now, let's show them in the order from DB (which puts new ones at end), so let's reverse to show newest first.
+        // Sort by newest first
         const reversedLinks = [...links].reverse();
 
         reversedLinks.forEach(link => {
             const card = document.createElement('div');
             card.className = 'link-card';
 
+            // Safe Strings
+            const safeCategory = escapeHtml(link.category);
+            const safeTitle = escapeHtml(link.title);
+            const safeUrl = escapeHtml(link.url);
+
             card.innerHTML = `
                 <div>
-                    <div class="link-category">${escapeHtml(link.category)}</div>
-                    <div class="link-title">${escapeHtml(link.title)}</div>
-                    <div class="link-url" title="${escapeHtml(link.url)}">${escapeHtml(link.url)}</div>
+                    <div class="link-category">${safeCategory}</div>
+                    <div class="link-title">${safeTitle}</div>
+                    <div class="link-url" title="${safeUrl}">${safeUrl}</div>
                 </div>
-                <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer" class="link-action">Visit Site &rarr;</a>
+                <div class="card-actions">
+                    <a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="link-action">Visit Site &rarr;</a>
+                    <button class="btn-delete" data-id="${link.id}">Delete</button>
+                </div>
             `;
 
             linksContainer.appendChild(card);
         });
+
+        // Add event listeners to new delete buttons
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+            btn.addEventListener('click', handleDelete);
+        });
+    };
+
+    // Handle Delete
+    const handleDelete = async (e) => {
+        const id = e.target.dataset.id;
+        if (!confirm('Are you sure you want to delete this link?')) return;
+
+        const btn = e.target;
+        const originalText = btn.textContent;
+        btn.textContent = 'Deleting...';
+        btn.disabled = true;
+
+        try {
+            const response = await fetch(`/api/links/${id}`, {
+                method: 'DELETE'
+            });
+
+            if (!response.ok) throw new Error('Failed to delete');
+
+            // Refresh list
+            await fetchLinks();
+        } catch (error) {
+            console.error(error);
+            alert('Failed to delete link.');
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }
     };
 
     // Basic XSS protection
